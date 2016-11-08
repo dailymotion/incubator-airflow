@@ -36,13 +36,14 @@ def sigint_handler(signal, frame):
 
 
 def setup_logging(filename):
+    from logging.handlers import SysLogHandler
+    logging = SysLogHandler(address='/dev/log')
     root = logging.getLogger()
-    handler = logging.FileHandler(filename)
+    #handler = logging.FileHandler(filename)
     formatter = logging.Formatter(settings.SIMPLE_LOG_FORMAT)
     handler.setFormatter(formatter)
     root.addHandler(handler)
     root.setLevel(settings.LOGGING_LEVEL)
-
     return handler.stream
 
 
